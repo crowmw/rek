@@ -5,6 +5,7 @@ function App() {
     const [employees, setEmpployees] = useState([{firstName: "Jan", lastName: "Kowalski"}])
     const [errorMessage, setErrorMessage] = useState('')
     const [selectedEmployee, setSelectedEmployee] = useState(NaN)
+
     const firstNameInput = useRef()
     const lastNameInput = useRef()
 
@@ -12,6 +13,7 @@ function App() {
         e.preventDefault()
         const firstName = firstNameInput.current.value
         const lastName = lastNameInput.current.value
+
         if(!firstName || !lastName) {
             setErrorMessage("Podaj imie lub nazwisko pracownika!")
         } else {
@@ -28,7 +30,7 @@ function App() {
         setSelectedEmployee(employeeIndex)
     }
 
-    const removeButtonMouseLeaveHandler = (employeeIndex) => {
+    const removeButtonMouseLeaveHandler = () => {
         setSelectedEmployee(NaN)
     }
 
@@ -50,7 +52,7 @@ function App() {
                         [
                             <span key={`${index}-firstName`} className={selectedEmployee === index ? 'App__grid--selected' : ''}>{e.firstName}</span>,
                             <span key={`${index}-lastName`} className={selectedEmployee === index ? 'App__grid--selected' : ''}>{e.lastName}
-                                <button onClick={() => removeEmployeeHandler(index)} onMouseEnter={() => removeButtonMouseEnterHandler(index)} onMouseLeave={() => removeButtonMouseLeaveHandler(index)}>X</button>
+                                <button onClick={() => removeEmployeeHandler(index)} onMouseEnter={() => removeButtonMouseEnterHandler(index)} onMouseLeave={removeButtonMouseLeaveHandler}>X</button>
                             </span>
                         ]
                 )}
